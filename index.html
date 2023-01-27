@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new slider</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main_box">
+        <div class="slider">
+            <div class="slides"><img src="https://wallpaperaccess.com/full/2086892.jpg" alt=""></div>
+            <div class="slides"><img src="https://wallpapercave.com/wp/wp5231514.jpg" alt=""></div>
+            <div class="slides"><img src="https://www.hdwallpapers.in/download/cyborg_warrior_games_4k_hd_ghostrunner-3840x2160.jpg" alt=""></div>
+            <div class="slides"><img src="https://www.teahub.io/photos/full/8-86458_4k-gaming-wallpapers-images-is-cool-wallpapers-projects.jpg" alt=""></div>
+            <div class="slides"><img src="https://wallpaper.dog/large/991096.jpg" alt=""></div>
+            <div class="slides"><img src="https://wallpaper.dog/large/10905.jpg" alt=""></div>
+            <div class="slides"><img src="https://wallpapercave.com/wp/wp7546559.jpg" alt=""></div>
+            <div class="slides"><img src="https://p4.wallpaperbetter.com/wallpaper/91/244/974/aloy-horizon-zero-dawn-games-pc-games-wallpaper-preview.jpg" alt=""></div>           
+            <div class="slides"><img src="https://picstatio.com/large/181525/nithral-gwent-the-witcher-card-game-4k-8k.jpg" alt=""></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        let slides = document.querySelectorAll('.slides');
+        let indexValue = 1 ;
+        const slideWidth = slides[0].clientWidth;
+        const interval = 3000;
+        
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length-1].cloneNode(true);
+
+        firstClone.id = 'first_clone';
+        lastClone.id = 'last_clone';
+
+        slider.append(firstClone);
+        slider.prepend(lastClone);
+
+        slider.style.transform = `translateX(${-slideWidth*indexValue}px)`;
+
+        const sliding = () => {
+            setInterval(() => {
+                indexValue++;
+                slider.style.transform = `translateX(${-slideWidth*indexValue}px)`;
+                slider.style.transition = '2s'
+            }, interval);
+        }
+
+        slider.addEventListener('transitionend',()=>{
+            slides = document.querySelectorAll('.slides');
+            if(slides[indexValue].id===firstClone.id){
+                slider.style.transition = 'none';
+                indexValue = 1 ;
+                slider.style.transform = `translateX(${-slideWidth*indexValue}px)`;               
+            }         
+        })
+        sliding()
+    </script>
+
+
+</body>
+</html>
