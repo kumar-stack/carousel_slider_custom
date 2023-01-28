@@ -28,6 +28,7 @@
         let indexValue = 1 ;
         const slideWidth = slides[0].clientWidth;
         const interval = 3000;
+        let stopInteval;
         
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slides.length-1].cloneNode(true);
@@ -41,7 +42,7 @@
         slider.style.transform = `translateX(${-slideWidth*indexValue}px)`;
 
         const sliding = () => {
-            setInterval(() => {
+            stopInteval = setInterval(() => {
                 indexValue++;
                 slider.style.transform = `translateX(${-slideWidth*indexValue}px)`;
                 slider.style.transition = '2s'
@@ -56,7 +57,17 @@
                 slider.style.transform = `translateX(${-slideWidth*indexValue}px)`;               
             }         
         })
+
         sliding()
+
+        slider.addEventListener('mouseenter',function(){
+              clearInterval(stopInteval)
+              console.log('pause')
+            })
+            slider.addEventListener('mouseleave',function(){
+              sliding()
+              console.log('play')
+            })
     </script>
 
 
